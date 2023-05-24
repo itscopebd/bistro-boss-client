@@ -18,10 +18,10 @@ const Category = () => {
             <Swiper
                 slidesPerView={4}
                 spaceBetween={5}
-                // centeredSlides={true}
                 pagination={{
                     clickable: true,
                 }}
+                
                 modules={[Pagination]}
                 className="mySwiper"
             >
