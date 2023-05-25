@@ -2,7 +2,7 @@ import React from 'react';
 
 const MenuItem = ({ items }) => {
     const { name, image, recipe, price } = items;
-    console.log(items)
+  
 
     return (
         <div className='flex justify-between gap-5'>
