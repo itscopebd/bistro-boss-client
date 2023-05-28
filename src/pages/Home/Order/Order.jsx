@@ -1,11 +1,9 @@
 import orderImage from "../../../assets/shop/banner2.jpg"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-
 import Cover from '../../Shared/Cover/Cover';
 import { useState } from "react";
 import UseMenu from "../../../hooks/UseMenu";
-import Card from "../../../components/Card/Card";
 import OrderTab from "./OrderTab/OrderTab";
 import { useParams } from "react-router-dom";
 const Order = () => {
@@ -16,8 +14,7 @@ const Order = () => {
     const {category} = useParams();
 
     const initialIndex=categories.indexOf(category)
-    console.log("categories " + categories[0])
-    console.log("category " + category)
+   
 
     const [tabIndex, setTabIndex] = useState(initialIndex);
 

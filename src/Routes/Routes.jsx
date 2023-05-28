@@ -5,6 +5,9 @@ import Menu from "../pages/Home/Menu/Menu";
 import Order from "../pages/Home/Order/Order";
 import Login from "../components/Login/Login";
 import Registration from "../components/Registration/Registration";
+import Privaterouter from "./Privaterouter";
+import MyCart from "../pages/Dashbroad/MyCart/MyCart";
+import Dashbroad from "../Layout/Dashbroad";
 
 export const router = createBrowserRouter([
   {
@@ -20,16 +23,26 @@ export const router = createBrowserRouter([
         element: <Menu></Menu>
       },
       {
-        path:"/order/:category",
-        element:<Order></Order>
-      },{
-        path:"/login",
-        element:<Login></Login>
+        path: "/order/:category",
+        element: <Order></Order>
+      }, {
+        path: "/login",
+        element: <Login></Login>
       },
       {
-        path:"/singup",
-        element:<Registration></Registration>
+        path: "/singup",
+        element: <Registration></Registration>
       }
     ]
   },
+  {
+    path: "dashbroad",
+    element: <Dashbroad></Dashbroad>,
+    children: [
+      {
+        path: "mycart",
+        element: <MyCart></MyCart>
+      }
+    ]
+  }
 ]);

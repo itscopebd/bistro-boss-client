@@ -1,16 +1,51 @@
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { FaShoppingCart } from 'react-icons/fa';
+import { useContext } from "react";
+import { AuthContext } from './../../AuthContext/AuthProvider';
+import Swal from "sweetalert2";
 const Navbar = () => {
+
+    const { logOut,user } = useContext(AuthContext);
+
+    const navigate = useNavigate()
+
+
+
+    const userSingOut = () => {
+        logOut()
+            .then(result => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                navigate('/')
+            }).catch(error => {
+                console.log(error)
+            })
+    }
+
+
+
     const navOptions = <>
 
         <li><Link to="/">Home</Link></li>
         <li> <Link to="/menu">Our Menu</Link> </li>
         <li> <Link to="/order/Salads">Order</Link> </li>
-        <li> <Link to="/login">LogIn</Link> </li>
-        <li> <Link to="/singup">SingUp</Link> </li>
-
+        <li>  <Link to="/dashbroad/mycart" className="gap-2 relative">
+            <FaShoppingCart></FaShoppingCart>
+            <span className="badge badge-secondary rounded-full absolute top-0 -right-3">10</span>
+            {/* <button className="btn">inbox</button> */}
+        </Link>
+        </li>
+        {
+            user? <li className="cursor-pointer" onClick={userSingOut}> SingOut </li> : <> <li> <Link to="/login">LogIn</Link> </li>
+            <li> <Link to="/singup">SingUp</Link> </li> </>
+        }
     </>
-
+ 
     return (
         <>
             <div className="navbar bg-black fixed z-10 bg-opacity-30 text-white max-w-screen-xl">
