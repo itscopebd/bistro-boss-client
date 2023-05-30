@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../AuthContext/AuthProvider';
 import Swal from 'sweetalert2';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
 
 
@@ -16,14 +16,9 @@ console.log(froms)
  const [disable, setDisable] = useState(true)
     const captcha = useRef(null)
 
-
-
-
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, []);
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -41,7 +36,6 @@ console.log(froms)
         })
         navigate(froms,{replace:true})
     }
-
 
     const handleValidateCaptcha = (e) => {
 
@@ -86,15 +80,12 @@ console.log(froms)
                                 </label>
                                 <input onBlur={handleValidateCaptcha} type="text" ref={captcha} placeholder="Type the above captha code" name='captcha' className="input input-bordered" />
                                 
-
                             </div>
-
-
-
 
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary" disabled={disable}>Login</button>
                             </div>
+                            <button className='text-red-500'>You don't have an account? Please <Link to="/singup" className='text-green-600'>SingUp</Link> </button>
                         </div>
                     </div>
                 </div>

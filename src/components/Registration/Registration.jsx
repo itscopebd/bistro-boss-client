@@ -2,16 +2,42 @@ import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../AuthContext/AuthProvider';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Registration = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const  {createUser}  = useContext(AuthContext)
-   
+    const  {createUser,userProfileUpdate}  = useContext(AuthContext)
+   const navigate= useNavigate()
     const onSubmit = data => {
+        console.log(data.photourl)
         createUser(data.email, data.password)
-        .then(data=>{
-            console.log(data.user)
+        .then(result=>{
+            userProfileUpdate(data.name, data.photourl)
+            .then(()=>{
+                const saveData={name:data.name, email:data.email}
+                fetch("http://localhost:5000/users/",{
+                    method:"POST",
+                    headers:{
+                        "content-type":"aplication/json"
+                    },
+                    body: JSON.stringify(saveData)
+                    
+                })
+                .then(result=>{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Registration Success',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                      navigate("/login")
+                }).catch(error=>{
+                    
+                })
+            })
         })
     };
     return (
@@ -32,11 +58,17 @@ const Registration = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" name='email' placeholder="Name" className="input input-bordered" {...register("name", { required: true, minLength: 5, maxLength: 10 })} />
+                                <input type="text" name='email' placeholder="Name" className="input input-bordered" {...register("name", { required: true })} />
                                 {errors.name?.type === "required" && <p className='text-red-500 mt-2'>Name field is required</p>}
-                                {errors.name?.type === "minLength" && <p className='text-red-500 mt-2'>Minimum 5 charecter</p>}
-                                {errors.name?.type === "maxLength" && <p className='text-red-500 mt-2'>Maximum 10 charecter</p>}
                             </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Photo Url</span>
+                                </label>
+                                <input type="url" name='photourl' placeholder="Photo Url" className="input input-bordered" {...register("photourl", { required: true })} />
+                                {errors.name?.type === "required" && <p className='text-red-500 mt-2'>Photo Url field is required</p>}
+                            </div>
+
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -53,7 +85,6 @@ const Registration = () => {
                                     required: true,
                                     pattern: /(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])/
 
-
                                 })} />
                                 {errors.password?.type === "required" && <p className='text-red-500 mt-2'>Password field is required</p>}
                                 {errors.password?.type === "pattern" && <p className='text-red-500 mt-2'>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</p>}
@@ -62,6 +93,7 @@ const Registration = () => {
                             <div className="form-control mt-6">
                                 <input type='submit' className="btn btn-primary" value="SingUp" />
                             </div>
+                            <button className='text-red-500'>You have an account? Please <Link to="/login" className='text-green-600'>LogIn</Link> </button>
                         </form>
                     </div>
                 </div>

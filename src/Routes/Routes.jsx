@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashbroad",
-    element: <Dashbroad></Dashbroad>,
+    element: <Privaterouter><Dashbroad></Dashbroad></Privaterouter>,
     children: [
       {
         path: "mycart",

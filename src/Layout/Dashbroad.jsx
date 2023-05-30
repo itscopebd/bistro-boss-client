@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaHome, FaCalendarAlt, FaShoppingCart } from 'react-icons/fa';
 import { Helmet } from 'react-helmet';
 const Dashbroad = () => {
@@ -12,7 +12,7 @@ const Dashbroad = () => {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-center justify-center">
 
-                    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                    <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden">Open drawer</label>
 
 
                     <Outlet></Outlet>
@@ -23,13 +23,13 @@ const Dashbroad = () => {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-[#D1A054] text-base-content">
 
-                        <li> <Link to="/"> <FaHome /> User Home</Link> </li>
-                        <li>  <Link> <FaCalendarAlt></FaCalendarAlt> Resevations</Link> </li>
-                        <li>  <Link> <FaCalendarAlt></FaCalendarAlt> Payment History</Link> </li>
-                        <li>  <Link to="/dashbroad/mycart"> <FaShoppingCart></FaShoppingCart> My Cart</Link> </li>
+                        <li> <NavLink to="/deshbroad/home" className= {({isActive})=>isActive? "text-white":""}> <FaHome /> User Home</NavLink> </li>
+                        <li>  <NavLink to="/deshbroad/reservations" className= {({isActive})=>isActive? "text-white":""}> <FaCalendarAlt></FaCalendarAlt> Resevations</NavLink> </li>
+                        <li>  <NavLink to="/dashbroad/history" className= {({isActive})=>isActive? "text-white":""}> <FaCalendarAlt></FaCalendarAlt> Payment History</NavLink> </li>
+                        <li>  <NavLink to="/dashbroad/mycart" className= {({isActive})=>isActive? "text-white":""}> <FaShoppingCart></FaShoppingCart> My Cart</NavLink> </li>
                         <div className="divider"></div>
-                        <li>  <Link> <FaHome /> Home</Link> </li>
-                        <li>  <Link> <FaHome /> Our Menu</Link> </li>
+                        <li>  <NavLink to="/"  className= {({isActive})=>isActive? "text-white":""}> <FaHome /> Home</NavLink> </li>
+                        <li>  <NavLink to="/our-menu" className= {({isActive})=>isActive? "text-white":""}> <FaHome /> Our Menu</NavLink> </li>
                     </ul>
 
                 </div>

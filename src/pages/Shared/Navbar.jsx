@@ -3,10 +3,11 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { useContext } from "react";
 import { AuthContext } from './../../AuthContext/AuthProvider';
 import Swal from "sweetalert2";
+import UseCart from "../../hooks/useCart";
 const Navbar = () => {
 
     const { logOut,user } = useContext(AuthContext);
-
+const [cart]= UseCart() 
     const navigate = useNavigate()
 
 
@@ -36,7 +37,7 @@ const Navbar = () => {
         <li> <Link to="/order/Salads">Order</Link> </li>
         <li>  <Link to="/dashbroad/mycart" className="gap-2 relative">
             <FaShoppingCart></FaShoppingCart>
-            <span className="badge badge-secondary rounded-full absolute top-0 -right-3">10</span>
+            <span className="badge badge-secondary rounded-full absolute top-0 -right-3">+{cart.length}</span>
             {/* <button className="btn">inbox</button> */}
         </Link>
         </li>
