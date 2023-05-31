@@ -8,6 +8,7 @@ import Registration from "../components/Registration/Registration";
 import Privaterouter from "./Privaterouter";
 import MyCart from "../pages/Dashbroad/MyCart/MyCart";
 import Dashbroad from "../Layout/Dashbroad";
+import AllUsers from "../pages/Dashbroad/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +43,13 @@ export const router = createBrowserRouter([
       {
         path: "mycart",
         element: <MyCart></MyCart>
+      },
+      {
+        path: "allusers",
+        element: <AllUsers/>
       }
     ]
+      
+    
   }
 ]);

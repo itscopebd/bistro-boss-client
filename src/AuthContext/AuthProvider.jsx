@@ -52,7 +52,8 @@ const userProfileUpdate=(name,photo)=>{
         createUser,
         logOut,
         logIn,
-        userProfileUpdate
+        userProfileUpdate,
+        singIn
     }
 
     return (

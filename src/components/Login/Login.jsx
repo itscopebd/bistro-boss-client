@@ -4,16 +4,17 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { AuthContext } from '../../AuthContext/AuthProvider';
 import Swal from 'sweetalert2';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../../pages/Shared/SocialLogin/SocialLogin';
 const Login = () => {
 
 
-const {user,logIn}= useContext(AuthContext)
-const navigate = useNavigate();
-const location = useLocation();
+    const { user, logIn } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const location = useLocation();
 
-const froms = location.state?.from?.pathname || "/";
-console.log(froms)
- const [disable, setDisable] = useState(true)
+    const froms = location.state?.from?.pathname || "/";
+    console.log(froms)
+    const [disable, setDisable] = useState(true)
     const captcha = useRef(null)
 
     useEffect(() => {
@@ -25,16 +26,17 @@ console.log(froms)
         const from = e.target;
         const email = from.email.value;
         const password = from.password.value;
-        logIn(email,password)
-        .then(result=>{
-            Swal.fire({
-                success: 'Success',
-                title: 'LogIn',
-                text: 'Successfully!'
-              }) 
+        logIn(email, password)
+            .then(result => {
               
-        })
-        navigate(froms,{replace:true})
+                Swal.fire({
+                    success: 'Success',
+                    title: 'LogIn',
+                    text: 'Successfully!'
+                })
+
+            })
+        navigate(froms, { replace: true })
     }
 
     const handleValidateCaptcha = (e) => {
@@ -49,15 +51,18 @@ console.log(froms)
     }
 
     return (
-        <div className="hero min-h-screen bg-base-200">
-            <form onSubmit={handleSubmit}>
+        <>
+            <div className="hero min-h-screen bg-base-200">
+
 
                 <div className="hero-content flex">
                     <div className="text-center lg:text-left h-96">
-                      <img src={logIn} alt="" className='w-full' />
+                        <img src={logIn} alt="" className='w-full' />
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
-                        <div className="card-body">
+                    <h3 className='text-center mt-5 font-bold text-2xl'>LogIn</h3>
+
+                        <form onSubmit={handleSubmit} className="mt-0 card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -79,19 +84,28 @@ console.log(froms)
                                     <LoadCanvasTemplate />
                                 </label>
                                 <input onBlur={handleValidateCaptcha} type="text" ref={captcha} placeholder="Type the above captha code" name='captcha' className="input input-bordered" />
-                                
+
                             </div>
 
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary" disabled={disable}>Login</button>
                             </div>
                             <button className='text-red-500'>You don't have an account? Please <Link to="/singup" className='text-green-600'>SingUp</Link> </button>
+
+
+                        </form>
+                        <div className='pb-3 text-center'>
+                            <SocialLogin></SocialLogin>
                         </div>
                     </div>
+
                 </div>
 
-            </form>
-        </div>
+
+
+            </div>
+
+        </>
     );
 };
 

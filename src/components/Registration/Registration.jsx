@@ -5,6 +5,7 @@ import { AuthContext } from '../../AuthContext/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+
 const Registration = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -46,14 +47,15 @@ const Registration = () => {
                 <title> SingUP</title>
             </Helmet>
             <div className="hero min-h-screen bg-base-200">
+                
                 <div className="hero-content flex">
                     <div className="text-center lg:text-left h-96">
                         <img src="" alt="" className='w-full' />
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
+                    <h3 className='text-center mt-5 font-bold text-2xl'>Registration</h3>
 
-
-                        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                        <form onSubmit={handleSubmit(onSubmit)} className="pt-0 card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
@@ -95,9 +97,12 @@ const Registration = () => {
                             </div>
                             <button className='text-red-500'>You have an account? Please <Link to="/login" className='text-green-600'>LogIn</Link> </button>
                         </form>
+                       
                     </div>
                 </div>
+                
             </div>
+           
         </>
     );
 };
